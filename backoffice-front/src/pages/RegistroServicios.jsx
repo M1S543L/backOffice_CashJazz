@@ -1,18 +1,10 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
+import React from 'react';
 import ButtonAppBar from '../components/Navbar';
 import { Container } from '@mui/system';
 import { Typography } from '@mui/material';
-import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
+import Endpoint from '../services/Endpoint';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -26,7 +18,7 @@ const columns = [
     const [rows, setRows] = React.useState([]);
   
     React.useEffect(() => {
-      axios.get('http://localhost:3000/tipo-servicio')
+      axios.get(`${Endpoint.apiEndpoint}/tipo-servicio`)
         .then(response => {
           setRows(response.data);
         })

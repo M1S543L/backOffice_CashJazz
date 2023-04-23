@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import  { useState,useEffect } from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -19,6 +19,7 @@ import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Endpoint from '../services/Endpoint';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -79,7 +80,7 @@ export default function EditarEmpleado() {
   const [empleado, setEmpleado] = useState(null);
 
   const handleSearch = () => {
-    axios.get(`http://localhost:3000/empleados/${id}`)
+    axios.get(`${Endpoint.apiEndpoint}/empleados/${id}`)
       .then(response => {
         setEmpleado(response.data);
         console.log(response.data)
@@ -94,7 +95,7 @@ export default function EditarEmpleado() {
   };
   
   const handleActualizarEmpleado = () => {
-    axios.patch(`http://localhost:3000/empleados/${id}`, {
+    axios.patch(`${Endpoint.apiEndpoint}/empleados/${id}`, {
       genero: genero,
       estado: estado,
       primerNombre: primerNombre,

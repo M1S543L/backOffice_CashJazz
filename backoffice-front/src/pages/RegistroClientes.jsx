@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import ButtonAppBar from '../components/Navbar';
 import { Container } from '@mui/system';
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
-
+import Endpoint from '../services/Endpoint';
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'primerNombre', headerName: 'Primer Nombre', width: 150 },
@@ -21,7 +21,7 @@ const columns = [
     const [rows, setRows] = React.useState([]);
   
     React.useEffect(() => {
-      axios.get('http://localhost:3000/clientes')
+      axios.get(`${Endpoint.apiEndpoint}/clientes`)
         .then(response => {
           setRows(response.data);
         })

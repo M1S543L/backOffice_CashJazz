@@ -4,7 +4,7 @@ import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import Endpoint from "../services/Endpoint";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -40,7 +40,7 @@ export default function NuevoServicio(){
                 precio: precio,
                 descripcion: descripcion
             }
-            axios.post('http://localhost:3000/tipo-servicio', nuevoServicio)
+            axios.post(`${Endpoint.apiEndpoint}/tipo-servicio`, nuevoServicio)
             .then(response => {
                 console.log(response);
                 setOpen(true)

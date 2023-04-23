@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import  { useState } from 'react'
 import ButtonAppBar from '../components/Navbar';
 import { Box, Container } from '@mui/material';
@@ -19,7 +19,7 @@ import axios from 'axios';
 import FormLabel from '@mui/material/FormLabel';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import Endpoint from '../services/Endpoint';
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -100,7 +100,7 @@ export default function NuevoCliente(){
       celular: telefono
     };
 
-    axios.post('http://localhost:3000/clientes', data)
+    axios.post(`${Endpoint.apiEndpoint}/clientes`, data)
       .then(response => {
         console.log(response);
         setOpen(true)

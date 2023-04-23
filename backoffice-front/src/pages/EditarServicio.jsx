@@ -4,7 +4,7 @@ import { Button, Container, Grid, TextField, Typography } from "@mui/material";
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import Endpoint from "../services/Endpoint";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -21,7 +21,7 @@ export default function EditarServicio(props) {
     setServicioId(id);
 
     // hacer una solicitud GET para obtener el servicio actual
-    axios.get(`http://localhost:3000/tipo-servicio/${id}`)
+    axios.get(`${Endpoint.apiEndpoint}/tipo-servicio/${id}`)
       .then(response => {
         const servicio = response.data;
         setNombre(servicio.nombreServicio);
@@ -44,7 +44,7 @@ export default function EditarServicio(props) {
         precio: precio,
         descripcion: descripcion
       }
-      axios.patch(`http://localhost:3000/tipo-servicio/${servicioId}`, servicioActualizado)
+      axios.patch(`${Endpoint.apiEndpoint}/tipo-servicio/${servicioId}`, servicioActualizado)
         .then(response => {
           console.log(response);
           setOpen(true)
