@@ -1,6 +1,6 @@
 export declare class CreateVehiculoDto {
-    idCliente: number;
-    idModelo: number;
+    clienteId: number;
+    modeloId: number;
     placa: string;
     año: number;
     color: string;

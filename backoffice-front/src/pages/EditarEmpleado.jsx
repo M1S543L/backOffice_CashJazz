@@ -131,10 +131,25 @@ export default function EditarEmpleado() {
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
 
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  
   const handleChangeId = (event) => {
     setId(event.target.value);
   };
 
+  const handleChangeUser = (event) => {
+    setUser(event.target.value);
+  };
+
+  const handlePw = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handlePw1 = (event) => {
+    setPassword1(event.target.value);
+  };
 
 
   const handleChange = (event, newValue) => {
@@ -197,11 +212,35 @@ export default function EditarEmpleado() {
     setChecked(event.target.checked);
   };
 
-  
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   const handleChangePuesto = (event) => {
     setPuesto(event.target.value);
   };
+
+  const handleSubmitAdminstrador = (event) => {
+    event.preventDefault();
+    const data = {
+      id:id,
+      clave:password,
+      usuario:user
+    };
+    if(password===password1)
+    axios.post(`${Endpoint.apiEndpoint}/administrativo`, data)
+      .then(response => {
+        console.log(response);
+        alert("Administrador agregado")
+      })
+      .catch(error => {
+        console.log(error);
+        alert("no se pudo agregar el admininistrador")
+      });
+     else{
+    alert("La contraseña no concuerda")
+     } 
+  }
 
   
   
@@ -411,7 +450,10 @@ export default function EditarEmpleado() {
 							<Grid id="administrativo" container spacing={2}>
 								<Grid item xs={4} textAlign={"center"}>
 									<TextField
+                  required
 									label="User"
+                  value={user}
+                  onChange={handleChangeUser}
 									disabled={!checked ? true : false}
 									/>
 									
@@ -419,24 +461,31 @@ export default function EditarEmpleado() {
 								<Grid item xs={4} textAlign={"center"}>
 									
 									<TextField
+                  required
 									label="Password"
 									type={"password"}
 									fullWidth
+                  value={password}
+                  onChange={handlePw}
 									disabled={!checked ? true : false}
 									/>
 								</Grid>
 
 								<Grid item xs={4} textAlign={"center"}>
 									<TextField
+                  required
 									label="confirm password"
 									type={"password"}
 									fullWidth
+                  onChange={handlePw1}
+                  value={password1}
 									disabled={!checked ? true : false}
 									/>
 								</Grid>
 
 								<Grid item xs={12} textAlign={"end"}>
 									<Button variant="contained"
+                  onClick={handleSubmitAdminstrador}
 									disabled={!checked ? true : false}
 									>Guardar</Button>
 								</Grid>

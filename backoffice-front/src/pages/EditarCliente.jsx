@@ -74,7 +74,7 @@ function a11yProps(index) {
 export default function EditarCliente() {
 
   const [modelo, setModelo] = React.useState('');
-  const [anio, setAnio] = React.useState('');
+  const [anio, setAnio] = React.useState(0);
   const [color, setColor] = React.useState('');
   const [descripcionV, setDescripcionV] = React.useState('');
   const [placa, setPlaca] = React.useState('');
@@ -102,13 +102,12 @@ export default function EditarCliente() {
   const handleAgregarVehiculo = () => {
 
     const data1 = {
-      id:5,
-      modelo:modelo,
+      idModelo:modelo,
       color: color,
       año:anio,
       placa:placa,
       descripcion:descripcionV,
-      
+      idCliente:id
     };
 
     axios.post(`${Endpoint.apiEndpoint}/vehiculos`, data1)

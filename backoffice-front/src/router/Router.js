@@ -26,6 +26,7 @@ import EditarServicio from '../pages/EditarServicio';
 
 
 
+
 function Rutas() {
   return (
     <Router>
@@ -46,6 +47,8 @@ function Rutas() {
         <Route path="/empleado/registros" element={isTokenValid() === 'autenticado'?<RegistroEmpleados/>:<Navigate to={"/login"}/>}/>
         <Route path="/servicio/registros" element={isTokenValid() === 'autenticado'?<RegistroServicios/>:<Navigate to={"/login"}/>}/>
         <Route path="/servicio/editar" element={isTokenValid() === 'autenticado'?<EditarServicio/>:<Navigate to={"/login"}/>}/>
+      
+
     </Routes>
 </Router>
   );
