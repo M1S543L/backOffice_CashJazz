@@ -20,6 +20,10 @@ import MuiAlert from '@mui/material/Alert';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { DataGrid } from '@mui/x-data-grid';
 import Endpoint from '../services/Endpoint';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -69,6 +73,55 @@ function a11yProps(index) {
 
 export default function EditarCliente() {
 
+  const [modelo, setModelo] = React.useState('');
+  const [anio, setAnio] = React.useState('');
+  const [color, setColor] = React.useState('');
+  const [descripcionV, setDescripcionV] = React.useState('');
+  const [placa, setPlaca] = React.useState('');
+
+  const handleChangeModelo = (event) => {
+    setModelo(event.target.value);
+  };
+
+  const handleChangeColor = (event) => {
+    setColor(event.target.value);
+  };
+
+  const handleChangeAnio = (event) => {
+    setAnio(event.target.value);
+  };
+
+  const handleChangePlaca = (event) => {
+    setPlaca(event.target.value);
+  };
+
+  const handleChangeDescripcionV = (event) => {
+    setDescripcionV(event.target.value);
+  };
+
+  const handleAgregarVehiculo = () => {
+
+    const data1 = {
+      id:5,
+      modelo:modelo,
+      color: color,
+      año:anio,
+      placa:placa,
+      descripcion:descripcionV,
+      
+    };
+
+    axios.post(`${Endpoint.apiEndpoint}/vehiculos`, data1)
+      .then(response => {
+        console.log(response);
+        alert("se agrego el nuevo vehiculo")
+      })
+      .catch(error => {
+        console.log(error);
+        console.log(data1);
+        alert("No se pudo agregar el vehiculo")
+      });
+  }
 
 
   const [rows, setRows] = React.useState([]);
@@ -396,7 +449,76 @@ export default function EditarCliente() {
 				  </TabPanel>
           <TabPanel value={value} index={2}>
 					  <Grid container spacing={2}>
-						  
+            <Grid item xs={3}>
+                        <TextField
+                        disabled={!checked?true:false}
+                        
+                        label="Placa"
+                        onChange={handleChangePlaca}
+                        value={placa}
+                        />
+                    </Grid>
+
+                    <Grid item xs={3}>
+                        <TextField
+                        disabled={!checked?true:false}
+                        type={"number"}
+                        label="Año"
+                        onChange={handleChangeAnio}
+                        value={anio}
+                        />
+                    </Grid>
+
+                    <Grid item xs={3}>
+                        <TextField
+                        disabled={!checked?true:false}
+                        
+                        label="Color"
+                        onChange={handleChangeColor}
+                        value={color}
+                        />
+                    </Grid>
+
+                    <Grid item xs={3}>
+                    <Box sx={{ minWidth: 120 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Modelo</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={modelo}
+                          label="Modelo"
+                          onChange={handleChangeModelo}
+                          disabled={!checked?true:false}
+                        >
+                          <MenuItem value={1}>Corolla</MenuItem>
+                          <MenuItem value={2}>Civic</MenuItem>
+                          <MenuItem value={3}>Elantra</MenuItem>
+                          <MenuItem value={4}>Swift</MenuItem>
+                          <MenuItem value={5}>Spark</MenuItem>
+                          
+                        </Select>
+                      </FormControl>
+                    </Box>
+                    </Grid>
+
+                    <Grid item xs={9}>
+                        <TextField
+                        fullWidth
+                        disabled={!checked?true:false}
+                        label="Descripcion"
+                        onChange={handleChangeDescripcionV}
+                        value={descripcionV}
+                        />
+                    </Grid>
+                    <Grid item xs={12} textAlign={"end"}>
+                    <Button disabled={!checked?true:false} onClick={handleAgregarVehiculo} variant="contained" size="large">Guardar</Button>
+
+                    </Grid>
+
+  
+              
+
 					  </Grid>
 				  </TabPanel>
           <TabPanel value={value} index={3}>

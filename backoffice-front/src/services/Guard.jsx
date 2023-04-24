@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
       const decodedToken = jwt_decode(accessToken);
       const currentTime = Date.now() / 1000;
       if (decodedToken.exp < currentTime) {
+        Cookies.remove('accessToken');
         return false; // el token ha caducado
       }
       console.log(accessToken)

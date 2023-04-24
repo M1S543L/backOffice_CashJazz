@@ -84,13 +84,13 @@ export default function EditarEmpleado() {
       .then(response => {
         setEmpleado(response.data);
         console.log(response.data)
-      
+        alert("Ya puede visualizar los datos")
         
       })
       .catch(error => {
         console.log(error);
-
-        setOpen(error?true:false)
+        alert("No se encontro el empleado")
+        
       });
   };
   
@@ -116,6 +116,7 @@ export default function EditarEmpleado() {
       });
   };
 
+  
   
   const [value, setValue] = React.useState(0);
   const [genero, setGenero] = React.useState('');
