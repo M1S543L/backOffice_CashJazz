@@ -1,6 +1,6 @@
 //Cabmiar al momento de subir el bakcend
 
-const apiEndpoint="http://localhost:3000"
+const apiEndpoint="https://proyecto-industria900-api.onrender.com"
 
 export default{
     apiEndpoint
