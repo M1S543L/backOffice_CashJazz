@@ -65,7 +65,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], VehiculoServicioController.prototype, "updateVehiculoServicio", null);
 VehiculoServicioController = __decorate([
-    (0, common_1.Controller)('vehiculo-servicio'),
+    (0, common_1.Controller)('vehiculoservicio'),
     __metadata("design:paramtypes", [vehiculo_servicio_service_1.VehiculoServicioService])
 ], VehiculoServicioController);
 exports.VehiculoServicioController = VehiculoServicioController;

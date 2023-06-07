@@ -16,15 +16,15 @@ const typeorm_1 = require("typeorm");
 let VehiculoServico = class VehiculoServico {
 };
 __decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    __metadata("design:type", Number)
+], VehiculoServico.prototype, "id", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => vehiculo_entity_1.vehiculo, (vehiculo) => vehiculo.id),
-    (0, typeorm_1.JoinColumn)(),
-    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", Number)
 ], VehiculoServico.prototype, "vehiculo", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => servicio_entity_1.Servicio, (servicio) => servicio.id),
-    (0, typeorm_1.JoinColumn)(),
-    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", Number)
 ], VehiculoServico.prototype, "servicio", void 0);
 __decorate([

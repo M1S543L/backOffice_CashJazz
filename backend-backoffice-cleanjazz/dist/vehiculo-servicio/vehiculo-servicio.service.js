@@ -21,28 +21,22 @@ let VehiculoServicioService = class VehiculoServicioService {
     constructor(VehiculoServicoRepository) {
         this.VehiculoServicoRepository = VehiculoServicoRepository;
     }
-    async create(createVehiculoServicioDto) {
-        try {
-            const vehiculoServicio = this.VehiculoServicoRepository.create(createVehiculoServicioDto);
-            return await this.VehiculoServicoRepository.save(vehiculoServicio);
+    async create(createVehiculoServicio) {
+        const vehiculoFound = await this.VehiculoServicoRepository.findOne({
+            where: {}
+        });
+        if (vehiculoFound) {
+            return new common_1.HttpException('Vehiculo already exists', common_1.HttpStatus.CONFLICT);
         }
-        catch (error) {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.BAD_REQUEST,
-                error: error.message,
-            }, common_1.HttpStatus.BAD_REQUEST);
-        }
+        const newVehiculo = this.VehiculoServicoRepository.create(createVehiculoServicio);
+        return this.VehiculoServicoRepository.save(newVehiculo);
     }
     async findAll() {
-        try {
-            return await this.VehiculoServicoRepository.find();
+        const vehiculoFound = await this.VehiculoServicoRepository.find();
+        if (!vehiculoFound) {
+            return new common_1.HttpException('Vehiculos not found', common_1.HttpStatus.NOT_FOUND);
         }
-        catch (error) {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.BAD_REQUEST,
-                error: error.message,
-            }, common_1.HttpStatus.BAD_REQUEST);
-        }
+        return vehiculoFound;
     }
     async findOne(vehiculoId, servicioId) {
         try {

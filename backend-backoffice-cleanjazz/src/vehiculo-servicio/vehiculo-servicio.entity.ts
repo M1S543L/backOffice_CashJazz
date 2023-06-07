@@ -1,18 +1,17 @@
 import { vehiculo } from "src/vehiculo/vehiculo.entity";
 import { Servicio } from "src/servicio/servicio.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity( { name: 'vehiculoServicio' })
 export class VehiculoServico {
 
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @ManyToOne(() => vehiculo, (vehiculo) => vehiculo.id)
-    @JoinColumn()
-    @PrimaryColumn()
     vehiculo: number;
   
     @ManyToOne(() => Servicio, (servicio) => servicio.id)
-    @JoinColumn()
-    @PrimaryColumn()
     servicio: number;
   
     @Column()

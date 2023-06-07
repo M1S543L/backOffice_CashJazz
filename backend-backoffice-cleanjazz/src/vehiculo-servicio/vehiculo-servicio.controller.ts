@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs
 import { VehiculoServicioService } from './vehiculo-servicio.service';
 import { CreateVehiculoServicioDto } from './dto/create-vehiculo-servicio.dto';
 import { UpdateVehiculoServicioDto } from './dto/update-vehiculo-servicio.dto';
-@Controller('vehiculo-servicio')
+@Controller('vehiculoservicio')
 export class VehiculoServicioController {
 
     constructor(private vehiculoServicioService: VehiculoServicioService) { }
